@@ -23,9 +23,67 @@
     </select>
   </nav>
 
-  <section id="bookmark-container">
-    <form>
-      <h2>Click Add Bookmark to begin!</h2>
+  <section class="bookmark-list-container">
+    <form class="js-bookmark-list-container">
+      <fieldset>
+        <legend>Create a Bookmark</legend>
+        <div class="input-groups">  
+          <div class="input-group">
+            <input type="text" name="title" id="bookmark-title" placeholder="title"></label>
+          </div>
+          <div class="input-group">
+            <input type="text" name="url" id="bookmark-url" placeholder="url"></label>
+          </div>
+          <div class="input-group">
+            <input type="text" name="description" id="bookmark-description" placeholder="brief description"></input>
+          </div>
+          
+          <form class="input-group">
+            <input type="radio" name="rating" id="bookmark-rating" value="5" checked>5
+            <input type="radio" name="rating" id="bookmark-rating" value="4">4
+            <input type="radio" name="rating" id="bookmark-rating" value="3">3
+            <input type="radio" name="rating" id="bookmark-rating" value="2">2
+            <input type="radio" name="rating" id="bookmark-rating" value="1">1
+          </form>
+
+          <div class="input-group">
+            <input type="submit" value="Add"/>
+          </div>
+          <div class="input-group">
+            <input type="submit" value="Cancel"/>
+          </div>
+        </div>
+      </fieldset>
+
+      <ul class="saved-bookmark-list">
+
+        <!-- will be added to js script -->
+        <li class ="saved-bookmark js-savedbookmark-list" id="1">
+          <div>
+            Article on jQuery<br><hr>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>
+            <button class="visit-site">
+              <span class="button-label">Visit Site</span>
+            </button>
+            <button class="delete-bookmark">
+              <span class="button-label">Delete</span>
+            </button>
+          </div>
+        </li> 
+        <li>
+          <div>
+            Thinkful - Dashboard
+          </div>
+        </li>
+        <li>
+          <div>
+            Articles on higher-order function
+          </div>
+        </li>
+        <!-- will be added to js script -->
+
+      </ul>
+
     </form>
   </section>
 
