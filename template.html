@@ -1,0 +1,63 @@
+<!-- Add-a-bookmark form -->
+<!-- inside of section class "js-bookmark-list-section" -->
+
+<form class="js-bookmark-list-container">
+  <fieldset>
+    <legend>Create a Bookmark</legend>
+    <div class="input-groups">
+      <div class="input-group">
+        <input type="text" name="title" id="bookmark-title" placeholder="title">
+        </label>
+      </div>
+      <div class="input-group">
+        <input type="text" name="url" id="bookmark-url" placeholder="url">
+        </label>
+      </div>
+      <div class="input-group">
+        <input type="text" name="description" id="bookmark-description" placeholder="brief description"></input>
+      </div>
+
+      <form class="input-group">
+        <input type="radio" name="rating" id="bookmark-rating" value="5" checked>5 Stars
+        <input type="radio" name="rating" id="bookmark-rating" value="4">4 Stars
+        <input type="radio" name="rating" id="bookmark-rating" value="3">3 Stars
+        <input type="radio" name="rating" id="bookmark-rating" value="2">2 Stars
+        <input type="radio" name="rating" id="bookmark-rating" value="1">1 Star
+      </form>
+
+      <div class="input-group">
+        <input type="submit" value="Add" />
+      </div>
+      <div class="input-group">
+        <input type="submit" value="Cancel" />
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+
+
+<!-- Normal view of the bookmark list -->
+<!-- inside of ul class "js-saved-bookmark-list" -->
+<li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
+  <span class="bookmark-title">${item.name}</span>
+  <span class="bookmark-rating">${item.rating}</span>
+</li>
+
+
+
+<!-- Expanded view of the bookmark along with the list -->
+<!-- inside of ul class "js-saved-bookmark-list" -->
+<li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
+  <span class="bookmark-title">${item.name}</span>
+  <span class="bookmark-rating">${item.rating}</span>
+  <textarea name="bookmark-description" class="bookmark-description">${item.description}</textarea>
+
+  <button class="visit-site">
+    <span class="button-label">Visit Site</span>
+  </button>
+  
+  <button class="delete-bookmark">
+    <span class="button-label">Delete</span>
+  </button>
+</li>

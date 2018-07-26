@@ -4,21 +4,44 @@
 
 const STORE = (function() {
 
-  const bookmarks = [{
-    id: cuid(),
-    title: 'Article on jQuery',
-    description: 'Lorem ipsum dolor sit amet',
-    rating: 5, 
-    expanded: true,
-  }];
+  const findById = function (id) {
+    return this.items.find(item => item.id === id);
+  };
 
-  const adding= false;
-  const error= false;
+  const addItem = function(item) {
+    this.items.push(item);
+  };
+
+  const findAndUpdate = function(id, newData) {
+    const currentData = this.findById(id);
+    Object.assign(currentData, newData);
+  };
+
+  const findAndDelete = function(id) {
+    this.items = this.items.filter(item => item.id !== id);
+  };
+
 
   return {
-    bookmarks,
-    adding,
-    error
+    bookmarks:[],
+    findById,
+    addItem,
+    findAndUpdate,
+    findAndDelete
   };
 
 }());
+
+
+
+// const addItems = [{
+//   id: cuid(),
+//   title: 'Article on jQuery',
+//   url: 'www.jquery.com',
+//   desc: 'Lorem ipsum dolor sit amet',
+//   rating: 5,
+//   expanded: true,
+// }];
+
+// const adding = false;
+// const error = false;
