@@ -61,8 +61,6 @@ const bookmarkList = (function() {
 
   const handleNewBookmark = function() {
     // this function will be responsible for when users add a new bookmark
-    console.log('`handleNewBookmark` ran');
-    
     $('.add-button').on('click', (e) => {
       e.preventDefault();
       // console.log('Add Button works');
@@ -95,16 +93,20 @@ const bookmarkList = (function() {
   const handleDeleteBookmark = function() {
     // this function will be responsible for when users want to delete a bookmark 
     // NOTE: only available when STORE.bookmarks.expanded = true
-    console.log('`handleDeleteBookmark` ran');
+    $('.js-saved-bookmark-list').on('click', '.delete-bookmark', (e) => {
+      e.preventDefault();
+      console.log('`handleDeleteBookmark` ran');
+      const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
+      api.deleteBookmark(dataItemId, () => {
+        STORE.findAndDelete(dataItemId);
+        render();
+      });
+    });
   };
 
 
-  
-  // function generateExpandBookmarkElement(item) {
 
-  // })
-
-  const expandToggle = function() {
+  const handleExpandToggle = function() {
     $('.js-saved-bookmark-list').on('click', '.expand-button', (e) => {
       e.preventDefault();
       const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
@@ -113,12 +115,6 @@ const bookmarkList = (function() {
       STORE.findAndUpdate(dataItemId, findItemById);
       render();
     });
-  };
-
-  const handleExpandBookmark = function() {
-    // this function will be responsible for when users want to click and expand the bookmark for additional info
-    // NOTE: need to switch STORE.bookmarks.expanded to true
-    console.log('`handleExpandBookmark` ran');
   };
 
 
@@ -130,9 +126,6 @@ const bookmarkList = (function() {
       findItemById.expanded = !findItemById.expanded;
       STORE.findAndUpdate(dataItemId, findItemById);
       render();
-      
-      console.log('`Compress-Button` functioning');
-
     });
   };
 
@@ -165,15 +158,12 @@ const bookmarkList = (function() {
 
 
   const generateBookmarkString = function (bookmarkList) {
-    console.log('`generateBookmarkString` works'); //this runs
-
     const items = bookmarkList.map((item) => generateBookmarkElement(item));
     return items.join('');
   };  
 
   const render = function () {
     // this function will be responsible for rendering the bookmarks in the DOM/page
-    console.log('`render` ran');
     const bookmarkString = generateBookmarkString(STORE.bookmarks);
     $('.js-saved-bookmark-list').html(bookmarkString);
   };
@@ -182,11 +172,11 @@ const bookmarkList = (function() {
   const bindEventListeners = function() {
     // this function will be the callback function when the page loads
     addButtonToggle();
-    expandToggle();
+    handleExpandToggle();
     handleCompressButton();
     handleNewBookmark();
     handleDeleteBookmark();
-    handleExpandBookmark();
+
   };
 
 

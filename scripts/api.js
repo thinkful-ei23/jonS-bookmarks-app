@@ -33,12 +33,11 @@ const api = (function() {
   //   $.ajax(query);
   // };
 
-  const deleteBookmark = function(id, deleteData, callback) {
+  const deleteBookmark = function(id, callback) {
     const query = {
       url: `${BASE_URL}/jon/bookmarks/${id}`,
       method: 'DELETE',
       contentType: 'application/json',
-      data: JSON.stringify(deleteData),
       success: callback
     };
     $.ajax(query);
