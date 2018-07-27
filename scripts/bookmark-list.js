@@ -3,35 +3,7 @@
 
 const bookmarkList = (function() {
 
-  function generateBookmarkElement(item) {
-    
-    return `
-      <li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
-        <span class="bookmark-title">${item.title}</span>
-        <span class="bookmark-rating">${item.rating}</span>
-      </li>
-    `;
-  }
-
-
-  function generateBookmarkString(bookmarkList) {
-    console.log('`generateBookmarkString` works'); //this runs
-
-    const items = bookmarkList.map((item) => generateBookmarkElement(item));
-    return items.join('');
-  }
-
-
-
-  function render() {
-    // this function will be responsible for rendering the bookmarks in the DOM/page
-    console.log('`render` ran');
-    const bookmarkString = generateBookmarkString(STORE.bookmarks);
-    $('.js-saved-bookmark-list').html(bookmarkString);
-  }
-
-
-  function generateAddBookmarkElement(item) {
+  const generateAddBookmarkElement = function() {
     if (STORE.addButtonToggle === false) { 
       return '';
     } else { 
@@ -68,7 +40,7 @@ const bookmarkList = (function() {
         </form>
       `;
     }
-  }  
+  };
   
   
   $.fn.extend({
@@ -80,14 +52,14 @@ const bookmarkList = (function() {
     }
   }); 
 
-  function addButtonToggle() {
+  const addButtonToggle = function() {
     $('.add-button').on('click', (e) => {
       e.preventDefault;
       STORE.addButtonToggle = !STORE.addButtonToggle;
     });
-  }  
+  };
 
-  function handleNewBookmark() {
+  const handleNewBookmark = function() {
     // this function will be responsible for when users add a new bookmark
     console.log('`handleNewBookmark` ran');
     
@@ -117,30 +89,105 @@ const bookmarkList = (function() {
         });
       });
     });
-  }
+  };
 
 
-  function handleDeleteBookmark() {
+  const handleDeleteBookmark = function() {
     // this function will be responsible for when users want to delete a bookmark 
     // NOTE: only available when STORE.bookmarks.expanded = true
     console.log('`handleDeleteBookmark` ran');
-  }
+  };
 
 
-  function handleExpandBookmark() {
+  
+  // function generateExpandBookmarkElement(item) {
+
+  // })
+
+  const expandToggle = function() {
+    $('.js-saved-bookmark-list').on('click', '.expand-button', (e) => {
+      e.preventDefault();
+      const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
+      const findItemById = STORE.findById(dataItemId);
+      findItemById.expanded = !findItemById.expanded;
+      STORE.findAndUpdate(dataItemId, findItemById);
+      render();
+    });
+  };
+
+  const handleExpandBookmark = function() {
     // this function will be responsible for when users want to click and expand the bookmark for additional info
     // NOTE: need to switch STORE.bookmarks.expanded to true
     console.log('`handleExpandBookmark` ran');
-  }
+  };
 
 
-  function bindEventListeners() {
+  const handleCompressButton = function() {
+    $('.js-saved-bookmark-list').on('click', '.compress-bookmark', (e) => {
+      e.preventDefault();
+      const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
+      const findItemById = STORE.findById(dataItemId);
+      findItemById.expanded = !findItemById.expanded;
+      STORE.findAndUpdate(dataItemId, findItemById);
+      render();
+      
+      console.log('`Compress-Button` functioning');
+
+    });
+  };
+
+
+  const generateBookmarkElement = function(item) {
+    if (item.expanded) {
+      return `
+        <li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
+          <span class="bookmark-title">${item.title}</span>
+          <span class="bookmark-rating">${item.rating}</span>
+          <textarea name="bookmark-description" class="bookmark-description">${item.desc}</textarea>
+
+          <button class="visit-site">Visit Site</button>
+          
+          <button class="delete-bookmark">Delete</button>
+          
+          <button class="compress-bookmark">Compress</button>
+        </li>
+      `;
+    } else {
+      return `
+        <li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
+          <span class="bookmark-title">${item.title}</span>
+          <span class="bookmark-rating">${item.rating}</span>
+          <button class="expand-button">Expand</button>
+        </li>
+      `;
+    }
+  };
+
+
+  const generateBookmarkString = function (bookmarkList) {
+    console.log('`generateBookmarkString` works'); //this runs
+
+    const items = bookmarkList.map((item) => generateBookmarkElement(item));
+    return items.join('');
+  };  
+
+  const render = function () {
+    // this function will be responsible for rendering the bookmarks in the DOM/page
+    console.log('`render` ran');
+    const bookmarkString = generateBookmarkString(STORE.bookmarks);
+    $('.js-saved-bookmark-list').html(bookmarkString);
+  };
+
+
+  const bindEventListeners = function() {
     // this function will be the callback function when the page loads
     addButtonToggle();
+    expandToggle();
+    handleCompressButton();
     handleNewBookmark();
     handleDeleteBookmark();
     handleExpandBookmark();
-  }
+  };
 
 
   return {
