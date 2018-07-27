@@ -42,7 +42,6 @@ const bookmarkList = (function() {
     }
   };
   
-  
   $.fn.extend({
     serializeJson: function () {
       const formData = new FormData(this[0]);
@@ -89,6 +88,18 @@ const bookmarkList = (function() {
     });
   };
 
+  const handleVisitSite = function() {
+    $('.js-saved-bookmark-list').on('click', '.visit-site', function(e) {
+      e.preventDefault();
+      console.log('handleVisitSite works');
+      const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
+      console.log(dataItemId);
+      const findItemById = STORE.findById(dataItemId);
+      console.log(findItemById);
+      const visitSiteLink = findItemById.url;
+      window.open(visitSiteLink);
+    });
+  };
 
   const handleDeleteBookmark = function() {
     // this function will be responsible for when users want to delete a bookmark 
@@ -104,8 +115,6 @@ const bookmarkList = (function() {
     });
   };
 
-
-
   const handleExpandToggle = function() {
     $('.js-saved-bookmark-list').on('click', '.expand-button', (e) => {
       e.preventDefault();
@@ -117,7 +126,6 @@ const bookmarkList = (function() {
     });
   };
 
-
   const handleCompressButton = function() {
     $('.js-saved-bookmark-list').on('click', '.compress-bookmark', (e) => {
       e.preventDefault();
@@ -128,7 +136,6 @@ const bookmarkList = (function() {
       render();
     });
   };
-
 
   const generateBookmarkElement = function(item) {
     if (item.expanded) {
@@ -156,7 +163,6 @@ const bookmarkList = (function() {
     }
   };
 
-
   const generateBookmarkString = function (bookmarkList) {
     const items = bookmarkList.map((item) => generateBookmarkElement(item));
     return items.join('');
@@ -168,13 +174,13 @@ const bookmarkList = (function() {
     $('.js-saved-bookmark-list').html(bookmarkString);
   };
 
-
   const bindEventListeners = function() {
     // this function will be the callback function when the page loads
     addButtonToggle();
     handleExpandToggle();
     handleCompressButton();
     handleNewBookmark();
+    handleVisitSite();
     handleDeleteBookmark();
 
   };
