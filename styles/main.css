@@ -1,20 +1,114 @@
 * {
   box-sizing: border-box;
-  background-color: #e6e6e6;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  display: block;
+  background-color: #e6e6e6;
+  font-family: "HelveticaNeue","Helvetica Neue",Helvetica,'Roboto',sans-serif;
+  font-size: 1em;
+  background: #fff;
+  /* margin: 0 auto;
+  text-align: center; */
 }
 
-button:hover {
+header {
+  text-align: center;
+  background: #fff;
+  margin: auto;
+}
+
+nav {
+  text-align: center;
+}
+
+ul {
+  padding: 0;
+  margin: 20px;
+}
+
+li {
+  padding: 8px;
+  margin: auto;
+  list-style: none;
+  text-align: center;
+  border: 1px solid #666666;
+}
+
+li span {
+  padding: 10px;
+}
+
+li .bookmark-rating {
+  font-size: 0.8em;
+}
+
+li .bookmark-description {
+  margin: auto;
+  padding: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+button, input[type=submit] {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: rgb(102, 102, 102);
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px;
+  width: 150px;
+  transition: all 0.5s;
   cursor: pointer;
+  margin: 5px;
 }
 
-/* 
-input .error-feedback {
-  background-color: transparent; 
-  border-style: solid; 
-  border-width: 0px 0px 1px 0px; 
-  border-color: darkred;
-} */
+li button {
+  width: 100px;
+  background-color: #666;
+}
+
+button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover span {
+  padding-right: 25px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+li button:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.24), 0 13px 46px 0 rgba(0,0,0,0.19);
+}
+
+.expanded-button {
+  float: center;
+  margin-top: 10px;
+}
+
+form #bookmark-rating {
+  font-size: 14px;
+}
+
+.rating-column {
+  float: right:
+}

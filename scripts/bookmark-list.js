@@ -25,6 +25,7 @@ const bookmarkList = (function() {
               </div>
 
               <form class="input-group">
+                Rating:
                 <input type="radio" name="rating" id="bookmark-rating" value="5" checked>5 Stars
                 <input type="radio" name="rating" id="bookmark-rating" value="4">4 Stars
                 <input type="radio" name="rating" id="bookmark-rating" value="3">3 Stars
@@ -157,24 +158,22 @@ const bookmarkList = (function() {
   const generateBookmarkElement = function(item) {
     if (item.expanded) {
       return `
-        <li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
-          <span class="bookmark-title">${item.title}</span>
-          <span class="bookmark-rating">${item.rating}</span>
-          <textarea name="bookmark-description" class="bookmark-description">${item.desc}</textarea>
+        <li class="saved-bookmark js-saved-bookmark-list grid halves" data-item-id="${item.id}">
+          <span class="bookmark-title grid column">${item.title}</span>
+          <span class="bookmark-rating column">Rating: ${item.rating}</span>
+          <textarea name="bookmark-description" class="bookmark-description grid column">${item.desc}</textarea>
 
-          <button class="visit-site">Visit Site</button>
-          
-          <button class="delete-bookmark">Delete</button>
-          
-          <button class="compress-bookmark">Compress</button>
+          <button class="visit-site expanded-button">Visit Site</button>
+          <button class="delete-bookmark expanded-button">Delete</button>
+          <button class="compress-bookmark expanded-button">Compress</button>
         </li>
       `;
     } else {
       return `
-        <li class="saved-bookmark js-saved-bookmark-list" data-item-id="${item.id}">
-          <span class="bookmark-title">${item.title}</span>
-          <span class="bookmark-rating">${item.rating}</span>
-          <button class="expand-button">Expand</button>
+        <li class="saved-bookmark js-saved-bookmark-list grid halves" data-item-id="${item.id}">
+          <span class="bookmark-title grid column">${item.title}</span>
+          <span class="bookmark-rating column">Rating: ${item.rating}</span>
+          <button class="expand-button column">Expand </button>
         </li>
       `;
     }
