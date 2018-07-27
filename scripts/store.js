@@ -4,6 +4,7 @@
 
 const STORE = (function() {
 
+  let addButtonToggle = false;
   // bookmark examples to test - DELETE when done testing
   // const bookmarks = [{
   //   id: cuid(),
@@ -30,12 +31,13 @@ const STORE = (function() {
 
   const findAndDelete = function(id) {
     this.bookmarks = this.bookmarks.filter(item => item.id !== id);
-  };
+  };  
 
 
 
   return {
-    bookmarks: [], 
+    bookmarks: [],
+    addButtonToggle,
     addItem,
     findById,
     findAndUpdate,

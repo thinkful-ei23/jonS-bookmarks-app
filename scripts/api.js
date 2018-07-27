@@ -21,8 +21,7 @@ const api = (function() {
     $.ajax(query);
   };
 
-  // -- UPDATE not required --
-
+  // -- UPDATING is not required for the project--
   // const updateBookmark = function(id, updateData, callback) {
   //   const query = {
   //     url: `${BASE_URL}/jon/bookmarks/${id}`,

@@ -1,5 +1,5 @@
 'use strict';
-/* global $ item STORE */
+/* global $ item STORE api */
 
 const bookmarkList = (function() {
 
@@ -31,46 +31,45 @@ const bookmarkList = (function() {
   }
 
 
-  function generateAddBookmarkElement() {
+  function generateAddBookmarkElement(item) {
+    if (STORE.addButtonToggle === false) { 
+      return '';
+    } else { 
+      return `
+        <form class="js-bookmark-list-container">
+          <fieldset>
+            <legend>Create a Bookmark</legend>
+            <div class="input-groups">
+              <div class="input-group">
+                <input type="text" name="title" id="bookmark-title" placeholder="title">
+                </label>
+              </div>
+              <div class="input-group">
+                <input type="text" name="url" id="bookmark-url" placeholder="url">
+                </label>
+              </div>
+              <div class="input-group">
+                <input type="text" name="desc" id="bookmark-description" placeholder="brief description"></input>
+              </div>
 
-    return `
-      <form class="js-bookmark-list-container">
-        <fieldset>
-          <legend>Create a Bookmark</legend>
-          <div class="input-groups">
-            <div class="input-group">
-              <input type="text" name="title" id="bookmark-title" placeholder="title">
-              </label>
-            </div>
-            <div class="input-group">
-              <input type="text" name="url" id="bookmark-url" placeholder="url">
-              </label>
-            </div>
-            <div class="input-group">
-              <input type="text" name="desc" id="bookmark-description" placeholder="brief description"></input>
-            </div>
+              <form class="input-group">
+                <input type="radio" name="rating" id="bookmark-rating" value="5" checked>5 Stars
+                <input type="radio" name="rating" id="bookmark-rating" value="4">4 Stars
+                <input type="radio" name="rating" id="bookmark-rating" value="3">3 Stars
+                <input type="radio" name="rating" id="bookmark-rating" value="2">2 Stars
+                <input type="radio" name="rating" id="bookmark-rating" value="1">1 Star
+              </form>
 
-            <form class="input-group">
-              <input type="radio" name="rating" id="bookmark-rating" value="5" checked>5 Stars
-              <input type="radio" name="rating" id="bookmark-rating" value="4">4 Stars
-              <input type="radio" name="rating" id="bookmark-rating" value="3">3 Stars
-              <input type="radio" name="rating" id="bookmark-rating" value="2">2 Stars
-              <input type="radio" name="rating" id="bookmark-rating" value="1">1 Star
-            </form>
-
-            <div class="input-group">
-              <input type="submit" value="Add" />
+              <div class="input-group">
+                <input type="submit" value="Add" />
+              </div>
             </div>
-            <div class="input-group">
-              <input type="submit" value="Cancel" />
-            </div>
-          </div>
-        </fieldset>
-      </form>
-    `;
-
-  }
-
+          </fieldset>
+        </form>
+      `;
+    }
+  }  
+  
   
   $.fn.extend({
     serializeJson: function () {
@@ -81,6 +80,12 @@ const bookmarkList = (function() {
     }
   }); 
 
+  function addButtonToggle() {
+    $('.add-button').on('click', (e) => {
+      e.preventDefault;
+      STORE.addButtonToggle = !STORE.addButtonToggle;
+    });
+  }  
 
   function handleNewBookmark() {
     // this function will be responsible for when users add a new bookmark
@@ -95,11 +100,13 @@ const bookmarkList = (function() {
       $('.js-bookmark-list-container').submit(e => {
         e.preventDefault();
         const newBookmark = $(e.target).serializeJson();
-        console.log(`New bookmark created: ${newBookmark}`);
+        // const parsedBookmark = JSON.parse(newBookmark);
         // TO-DO: need to figure out how to clear the inputs after submitting 
-        STORE.addItem(newBookmark);
-        render();
-        // ISSUE: displaying undefined on the page
+        api.createBookmark(newBookmark, (response) => {
+          STORE.addButtonToggle = false;
+          STORE.addItem(response);
+          render();
+        });
       });
     });
   }
@@ -121,6 +128,7 @@ const bookmarkList = (function() {
 
   function bindEventListeners() {
     // this function will be the callback function when the page loads
+    addButtonToggle();
     handleNewBookmark();
     handleDeleteBookmark();
     handleExpandBookmark();
