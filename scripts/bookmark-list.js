@@ -88,6 +88,23 @@ const bookmarkList = (function() {
     });
   };
 
+  const handleFilterRating = function() {
+    $('select.star-filter').change(e => {
+      e.preventDefault();
+      console.log('filter rating button works');
+      const ratingSelected = $('.star-filter option:selected').val();
+      console.log(ratingSelected);
+      if (ratingSelected === '') {
+        render();
+      }
+      const filteredBookmarks = STORE.bookmarks.filter(x => x.rating >= ratingSelected);
+      console.log(filteredBookmarks); //works - returns the filtered objects in an array
+      const listFilteredBookmark = generateBookmarkString(filteredBookmarks);
+      $('.js-saved-bookmark-list').html(listFilteredBookmark);
+
+    });
+  };
+
   const handleVisitSite = function() {
     $('.js-saved-bookmark-list').on('click', '.visit-site', function(e) {
       e.preventDefault();
@@ -177,6 +194,7 @@ const bookmarkList = (function() {
   const bindEventListeners = function() {
     // this function will be the callback function when the page loads
     addButtonToggle();
+    handleFilterRating();
     handleExpandToggle();
     handleCompressButton();
     handleNewBookmark();
