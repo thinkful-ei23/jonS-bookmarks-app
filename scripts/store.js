@@ -4,12 +4,23 @@
 
 const STORE = (function() {
 
-  const findById = function (id) {
-    return this.items.find(item => item.id === id);
-  };
+  // bookmark examples to test - DELETE when done testing
+  // const bookmarks = [{
+  //   id: cuid(),
+  //   title: 'Article on jQuery',
+  //   url: 'www.jQuery.com',
+  //   desc: 'helpful doc on jQuery',
+  //   rating: 5,
+  //   expanded: false
+  // }];
 
   const addItem = function(item) {
-    this.items.push(item);
+    console.log(`Adding the following Bookmark: ${item.title}`);
+    this.bookmarks.push(item);
+  };
+
+  const findById = function (id) {
+    return this.bookmarks.find(item => item.id === id);
   };
 
   const findAndUpdate = function(id, newData) {
@@ -18,16 +29,18 @@ const STORE = (function() {
   };
 
   const findAndDelete = function(id) {
-    this.items = this.items.filter(item => item.id !== id);
+    this.bookmarks = this.bookmarks.filter(item => item.id !== id);
   };
 
 
+
   return {
-    bookmarks:[],
-    findById,
+    bookmarks: [], 
     addItem,
+    findById,
     findAndUpdate,
-    findAndDelete
+    findAndDelete,
+    // expandedView: {expanded: false},
   };
 
 }());

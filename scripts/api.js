@@ -9,27 +9,30 @@ const api = (function() {
     $.getJSON(`${BASE_URL}/jon/bookmarks`, callback);
   };
 
-  const createBookmark = function(newAdd, callback) {
+
+  const createBookmark = function(addData, callback) {
     const query = {
       url: `${BASE_URL}/jon/bookmarks`,
       method: 'POST',
       contentType: 'application/json',
-      data: newAdd,
+      data: addData,
       success: callback,
     };
     $.ajax(query);
   };
 
-  const updateBookmark = function(id, updateData, callback) {
-    const query = {
-      url: `${BASE_URL}/jon/bookmarks/${id}`,
-      method: 'PATCH',
-      contentType: 'application/json',
-      data: JSON.stringify(updateData),
-      success: callback
-    };
-    $.ajax(query);
-  };
+  // -- UPDATE not required --
+
+  // const updateBookmark = function(id, updateData, callback) {
+  //   const query = {
+  //     url: `${BASE_URL}/jon/bookmarks/${id}`,
+  //     method: 'PATCH',
+  //     contentType: 'application/json',
+  //     data: JSON.stringify(updateData),
+  //     success: callback
+  //   };
+  //   $.ajax(query);
+  // };
 
   const deleteBookmark = function(id, deleteData, callback) {
     const query = {
@@ -45,7 +48,7 @@ const api = (function() {
   return {
     getBookmark,
     createBookmark,
-    updateBookmark,
+    // updateBookmark,
     deleteBookmark
   };
 
