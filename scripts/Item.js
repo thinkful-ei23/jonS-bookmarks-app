@@ -3,7 +3,7 @@
 
 const Item = (function() {
   const validateLink = function(link) {
-    if(!link) throw new TypeError('Please provide a link');
+    if(link === '') throw new TypeError('Please provide a link');
   };
 
   const create = function(title, url, desc, rating) {

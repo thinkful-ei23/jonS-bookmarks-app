@@ -49,7 +49,7 @@ const bookmarkList = (function() {
                 </label>
               </div>
               <div class="input-group">
-                <input type="text" name="desc" id="bookmark-description" placeholder="brief description"></input>
+                <input type="text" name="desc" id="bookmark-description" placeholder="(Optional) description"></input>
               </div>
 
               <form class="input-group">
@@ -99,6 +99,14 @@ const bookmarkList = (function() {
       // another event to collect user's input when user presses 'Add'
       $('.js-bookmark-list-container').submit(e => {
         e.preventDefault();
+        if ($('.input-group #bookmark-title').val() === '') {
+          // $('.input-group #bookmark-title').addClass('.error-feedback');
+          alert('Please provide a title.');
+        }
+        if ($('.input-group #bookmark-url').val() === '') {
+          // $('.input-group #bookmark-title').addClass('.error-feedback');
+          alert('Please provide a URL.');
+        }
         const newBookmark = $(e.target).serializeJson();
         // const parsedBookmark = JSON.parse(newBookmark);
         // TO-DO: need to figure out how to clear the inputs after submitting 
