@@ -26,7 +26,7 @@ const bookmarkList = (function() {
               </div>
 
               <form class="input-group" role="radiogroup">
-                Rating:
+                Rating:<br>
                 <input type="radio" name="rating" role="radio" tabindex="0" id="bookmark-rating" value="5" checked>5 Stars
                 <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="4">4 Stars
                 <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="3">3 Stars
@@ -168,7 +168,8 @@ const bookmarkList = (function() {
         <li class="saved-bookmark js-saved-bookmark-list grid halves" data-item-id="${item.id}">
           <span class="bookmark-title grid column">${item.title}</span>
           <span class="bookmark-rating column">Rating: ${item.rating}</span>
-          <textarea name="bookmark-description" class="bookmark-description grid column">${item.desc}</textarea>
+          <textarea name="bookmark-description" class="bookmark-description grid column" rows="5"
+          cols="30" readonly>${item.desc}</textarea>
 
           <button class="visit-site expanded-button">Visit Site</button>
           <button class="delete-bookmark expanded-button">Delete</button>

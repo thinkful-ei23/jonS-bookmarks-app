@@ -8,6 +8,7 @@ body {
   font-family: "HelveticaNeue","Helvetica Neue",Helvetica,'Roboto',sans-serif;
   font-size: 1em;
   background: #fff;
+  max-width: 500px;
   /* margin: 0 auto;
   text-align: center; */
 }
