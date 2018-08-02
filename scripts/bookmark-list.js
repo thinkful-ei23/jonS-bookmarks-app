@@ -13,15 +13,16 @@ const bookmarkList = (function() {
             <legend>Create a Bookmark</legend>
             <div class="input-groups">
               <div class="input-group">
-                <input type="text" name="title" id="bookmark-title" placeholder="title">
-                </label>
+                <label>Title:<br></label><input type="text" name="title" id="bookmark-title" placeholder="Title" required>
+                
               </div>
               <div class="input-group">
-                <input type="text" name="url" id="bookmark-url" placeholder="url">
-                </label>
+                <label>URL:<br></label><input type="text" name="url" id="bookmark-url" placeholder="http(s)://example.com" required>
+                
               </div>
               <div class="input-group">
-                <input type="text" name="desc" id="bookmark-description" placeholder="(Optional) description"></input>
+                <label>Description:<br></label><textarea type="text" name="desc" id="bookmark-description" placeholder="Brief description" rows="5"
+                cols="30"></textarea>
               </div>
 
               <form class="input-group">
@@ -82,6 +83,7 @@ const bookmarkList = (function() {
           // alert('Please provide a URL.');
           $('.error-display').html('<p>URL Required</p>').addClass('error-red');
         }
+
         const newBookmark = $(e.target).serializeJson();
         // const parsedBookmark = JSON.parse(newBookmark);
         // TO-DO: need to figure out how to clear the inputs after submitting 
@@ -193,6 +195,10 @@ const bookmarkList = (function() {
     // this function will be responsible for rendering the bookmarks in the DOM/page
     const bookmarkString = generateBookmarkString(STORE.bookmarks);
     $('.js-saved-bookmark-list').html(bookmarkString);
+
+    $('.input-group #bookmark-title').val('');
+    $('.input-group #bookmark-url').val('');
+    $('.input-group #bookmark-description').val('');
   };
 
   const bindEventListeners = function() {

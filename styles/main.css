@@ -117,9 +117,16 @@ form #bookmark-rating {
   float: right;
 }
 
+.input-group {
+  padding-bottom: 8px;
+}
+
 .error-red {
   color: red;
+
 }
+
+
 
 
 @media (min-width:992px) {
