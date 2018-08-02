@@ -13,25 +13,25 @@ const bookmarkList = (function() {
             <legend>Create a Bookmark</legend>
             <div class="input-groups">
               <div class="input-group">
-                <label>Title:<br></label><input type="text" name="title" id="bookmark-title" placeholder="Title" required>
+                <label>Title:<br></label><input type="text" name="title" id="bookmark-title" placeholder="Title" required aria-required="true"/>
                 
               </div>
               <div class="input-group">
-                <label>URL:<br></label><input type="text" name="url" id="bookmark-url" placeholder="http(s)://example.com" required>
+                <label>URL:<br></label><input type="url" name="url" id="bookmark-url" pattern="https://.*" placeholder="http(s)://example.com" required aria-required="true"/>
                 
               </div>
               <div class="input-group">
                 <label>Description:<br></label><textarea type="text" name="desc" id="bookmark-description" placeholder="Brief description" rows="5"
-                cols="30"></textarea>
+                cols="30" aria-multiline="true" aria-required="false"></textarea>
               </div>
 
-              <form class="input-group">
+              <form class="input-group" role="radiogroup">
                 Rating:
-                <input type="radio" name="rating" id="bookmark-rating" value="5" checked>5 Stars
-                <input type="radio" name="rating" id="bookmark-rating" value="4">4 Stars
-                <input type="radio" name="rating" id="bookmark-rating" value="3">3 Stars
-                <input type="radio" name="rating" id="bookmark-rating" value="2">2 Stars
-                <input type="radio" name="rating" id="bookmark-rating" value="1">1 Star
+                <input type="radio" name="rating" role="radio" tabindex="0" id="bookmark-rating" value="5" checked>5 Stars
+                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="4">4 Stars
+                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="3">3 Stars
+                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="2">2 Stars
+                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="1">1 Star
               </form>
 
               <div class="error-display">
