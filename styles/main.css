@@ -8,7 +8,8 @@ body {
   font-family: "HelveticaNeue","Helvetica Neue",Helvetica,'Roboto',sans-serif;
   font-size: 1em;
   background: #fff;
-  max-width: 500px;
+  max-width: 650px;
+  min-width: 370px;
   /* margin: 0 auto;
   text-align: center; */
 }
@@ -58,11 +59,11 @@ li .bookmark-description {
 button, input[type=submit] {
   display: inline-block;
   border-radius: 4px;
-  background-color: rgb(102, 102, 102);
+  background-color: rgb(64, 148, 182);
   border: none;
   color: #FFFFFF;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   padding: 8px;
   width: 150px;
   transition: all 0.5s;
@@ -72,7 +73,7 @@ button, input[type=submit] {
 
 li button {
   width: 100px;
-  background-color: #666;
+  background-color: rgb(134, 134, 134);
 }
 
 button span {
