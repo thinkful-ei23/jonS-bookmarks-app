@@ -34,7 +34,6 @@ const STORE = (function() {
   };  
 
 
-
   return {
     bookmarks: [],
     addButtonToggle,
@@ -42,7 +41,6 @@ const STORE = (function() {
     findById,
     findAndUpdate,
     findAndDelete,
-    // expandedView: {expanded: false},
   };
 
 }());

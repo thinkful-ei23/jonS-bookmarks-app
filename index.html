@@ -11,9 +11,9 @@
   <title>My Bookmarks App</title>
 </head>
 <body>
-  <header>
-    <h1>my.bookmarks</h1>
-      <nav class="grid">
+  <header role="banner">
+    <h1 role="heading">my.bookmarks</h1>
+      <nav class="grid" role="navigation">
         <button class="add-button bigger column" style="vertical-align:middle"><span>Add Bookmark </span></button>
         <select class="star-filter column">
           <option value="">Show All</option>
@@ -26,18 +26,20 @@
       </nav>
   </header>
 
-  <section id="js-bookmark-form-section">
+  <section id="js-bookmark-form-section" role="region">
     <!-- create-a-bookmark form -->
   </section>
   
   
 
-  <section id="bookmark-list-section" class="grid">
+  <section id="bookmark-list-section" class="grid" role="region">
     <ul class="js-saved-bookmark-list column">
       <!-- normal view of the bookmark -->
       <!-- expanded view of the bookmark -->
     </ul>    
   </section>
+
+  <footer role="contentinfo">July 2018 - Jon Sung</footer>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

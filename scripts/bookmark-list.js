@@ -33,6 +33,9 @@ const bookmarkList = (function() {
                 <input type="radio" name="rating" id="bookmark-rating" value="1">1 Star
               </form>
 
+              <div class="error-display">
+              </div>
+
               <div class="input-group">
                 <input type="submit" value="Add" />
               </div>
@@ -71,11 +74,13 @@ const bookmarkList = (function() {
         e.preventDefault();
         if ($('.input-group #bookmark-title').val() === '') {
           // $('.input-group #bookmark-title').addClass('.error-feedback');
-          alert('Please provide a title.');
+          // alert('Please provide a title.');
+          $('.error-display').html('<p>Title Required</p>').addClass('error-red');
         }
         if ($('.input-group #bookmark-url').val() === '') {
           // $('.input-group #bookmark-title').addClass('.error-feedback');
-          alert('Please provide a URL.');
+          // alert('Please provide a URL.');
+          $('.error-display').html('<p>URL Required</p>').addClass('error-red');
         }
         const newBookmark = $(e.target).serializeJson();
         // const parsedBookmark = JSON.parse(newBookmark);

@@ -18,8 +18,12 @@ header {
   margin: auto;
 }
 
-nav {
+nav, footer {
   text-align: center;
+}
+
+footer {
+  font-size: 0.6em;
 }
 
 ul {
@@ -110,5 +114,52 @@ form #bookmark-rating {
 }
 
 .rating-column {
-  float: right:
+  float: right;
+}
+
+.error-red {
+  color: red;
+}
+
+
+@media (min-width:992px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+  a {
+    font-size: 1rem;
+  }
+  input[type="radio"] {
+    height: 10px;
+    width: 10px;
+  }
+
+  select {
+    height: 40px;
+    width: 80px;
+  }
+
+  select option {
+    font-size: 1rem;
+  }
 }
