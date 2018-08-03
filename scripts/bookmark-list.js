@@ -17,7 +17,7 @@ const bookmarkList = (function() {
                 
               </div>
               <div class="input-group">
-                <label>URL:<br></label><input type="url" name="url" id="bookmark-url" pattern="https://.*" placeholder="http(s)://example.com" required aria-required="true"/>
+                <label>URL:<br></label><input type="url" name="url" id="bookmark-url" placeholder="http(s)://example.com" required aria-required="true"/>
                 
               </div>
               <div class="input-group">
@@ -64,29 +64,19 @@ const bookmarkList = (function() {
   };
 
   const handleNewBookmark = function() {
-    // this function will be responsible for when users add a new bookmark
     $('.add-button').on('click', (e) => {
       e.preventDefault();
-      // console.log('Add Button works');
-      // add add-a-bookmark form html to section id "js-bookmark-form-section"
       $('#js-bookmark-form-section').html(generateAddBookmarkElement);
-      // another event to collect user's input when user presses 'Add'
       $('.js-bookmark-list-container').submit(e => {
         e.preventDefault();
         if ($('.input-group #bookmark-title').val() === '') {
-          // $('.input-group #bookmark-title').addClass('.error-feedback');
-          // alert('Please provide a title.');
           $('.error-display').html('<p>Title Required</p>').addClass('error-red');
         }
         if ($('.input-group #bookmark-url').val() === '') {
-          // $('.input-group #bookmark-title').addClass('.error-feedback');
-          // alert('Please provide a URL.');
           $('.error-display').html('<p>URL Required</p>').addClass('error-red');
         }
 
         const newBookmark = $(e.target).serializeJson();
-        // const parsedBookmark = JSON.parse(newBookmark);
-        // TO-DO: need to figure out how to clear the inputs after submitting 
         api.createBookmark(newBookmark, (response) => {
           STORE.addButtonToggle = false;
           STORE.addItem(response);
@@ -99,14 +89,11 @@ const bookmarkList = (function() {
   const handleFilterRating = function() {
     $('select.star-filter').change(e => {
       e.preventDefault();
-      console.log('filter rating button works');
       const ratingSelected = $('.star-filter option:selected').val();
-      console.log(ratingSelected);
       if (ratingSelected === '') {
         render();
       }
       const filteredBookmarks = STORE.bookmarks.filter(x => x.rating >= ratingSelected);
-      console.log(filteredBookmarks); //works - returns the filtered objects in an array
       const listFilteredBookmark = generateBookmarkString(filteredBookmarks);
       $('.js-saved-bookmark-list').html(listFilteredBookmark);
 
@@ -116,22 +103,16 @@ const bookmarkList = (function() {
   const handleVisitSite = function() {
     $('.js-saved-bookmark-list').on('click', '.visit-site', function(e) {
       e.preventDefault();
-      console.log('handleVisitSite works');
       const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
-      console.log(dataItemId);
       const findItemById = STORE.findById(dataItemId);
-      console.log(findItemById);
       const visitSiteLink = findItemById.url;
       window.open(visitSiteLink);
     });
   };
 
   const handleDeleteBookmark = function() {
-    // this function will be responsible for when users want to delete a bookmark 
-    // NOTE: only available when STORE.bookmarks.expanded = true
     $('.js-saved-bookmark-list').on('click', '.delete-bookmark', (e) => {
       e.preventDefault();
-      console.log('`handleDeleteBookmark` ran');
       const dataItemId = $(e.currentTarget).closest('.saved-bookmark').attr('data-item-id');
       api.deleteBookmark(dataItemId, () => {
         STORE.findAndDelete(dataItemId);
@@ -193,7 +174,6 @@ const bookmarkList = (function() {
   };  
 
   const render = function () {
-    // this function will be responsible for rendering the bookmarks in the DOM/page
     const bookmarkString = generateBookmarkString(STORE.bookmarks);
     $('.js-saved-bookmark-list').html(bookmarkString);
 
@@ -203,7 +183,6 @@ const bookmarkList = (function() {
   };
 
   const bindEventListeners = function() {
-    // this function will be the callback function when the page loads
     addButtonToggle();
     handleFilterRating();
     handleExpandToggle();
@@ -213,7 +192,6 @@ const bookmarkList = (function() {
     handleDeleteBookmark();
 
   };
-
 
   return {
     render,

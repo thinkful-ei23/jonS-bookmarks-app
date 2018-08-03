@@ -9,7 +9,6 @@ const api = (function() {
     $.getJSON(`${BASE_URL}/jon/bookmarks`, callback);
   };
 
-
   const createBookmark = function(addData, callback) {
     const query = {
       url: `${BASE_URL}/jon/bookmarks`,
@@ -20,18 +19,6 @@ const api = (function() {
     };
     $.ajax(query);
   };
-
-  // -- UPDATING is not required for the project--
-  // const updateBookmark = function(id, updateData, callback) {
-  //   const query = {
-  //     url: `${BASE_URL}/jon/bookmarks/${id}`,
-  //     method: 'PATCH',
-  //     contentType: 'application/json',
-  //     data: JSON.stringify(updateData),
-  //     success: callback
-  //   };
-  //   $.ajax(query);
-  // };
 
   const deleteBookmark = function(id, callback) {
     const query = {
@@ -46,7 +33,6 @@ const api = (function() {
   return {
     getBookmark,
     createBookmark,
-    // updateBookmark,
     deleteBookmark
   };
 
