@@ -9,13 +9,14 @@ const api = (function() {
     $.getJSON(`${BASE_URL}/jon/bookmarks`, callback);
   };
 
-  const createBookmark = function(addData, callback) {
+  const createBookmark = function(addData, callback, error) {
     const query = {
       url: `${BASE_URL}/jon/bookmarks`,
       method: 'POST',
       contentType: 'application/json',
       data: addData,
       success: callback,
+      error
     };
     $.ajax(query);
   };

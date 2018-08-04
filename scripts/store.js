@@ -23,6 +23,10 @@ const STORE = (function() {
     this.bookmarks = this.bookmarks.filter(item => item.id !== id);
   };  
 
+  const setError = function (errorMsg) {
+    this.error = errorMsg;
+  };
+
 
   return {
     bookmarks: [],
@@ -31,6 +35,8 @@ const STORE = (function() {
     findById,
     findAndUpdate,
     findAndDelete,
+    error: null,
+    setError, 
   };
 
 }());

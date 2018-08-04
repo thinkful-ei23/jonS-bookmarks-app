@@ -13,11 +13,11 @@ const bookmarkList = (function() {
             <legend>Create a Bookmark</legend>
             <div class="input-groups">
               <div class="input-group">
-                <label>Title:<br></label><input type="text" name="title" id="bookmark-title" placeholder="Title" required aria-required="true"/>
+                <label>Title:<br></label><input type="text" name="title" id="bookmark-title" placeholder="Title" aria-required="true"/>
                 
               </div>
               <div class="input-group">
-                <label>URL:<br></label><input type="url" name="url" id="bookmark-url" placeholder="http(s)://example.com" required aria-required="true"/>
+                <label>URL:<br></label><input type="text" name="url" id="bookmark-url" placeholder="http://www.example.com" aria-required="true"/>
                 
               </div>
               <div class="input-group">
@@ -27,11 +27,11 @@ const bookmarkList = (function() {
 
               <form class="input-group" role="radiogroup">
                 Rating:<br>
-                <input type="radio" name="rating" role="radio" tabindex="0" id="bookmark-rating" value="5" checked>5 Stars
-                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="4">4 Stars
-                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="3">3 Stars
-                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="2">2 Stars
-                <input type="radio" name="rating" role="radio" tabindex="-1" id="bookmark-rating" value="1">1 Star
+                <input type="radio" name="rating" role="radio" id="bookmark-rating" value="5" checked>5 Stars
+                <input type="radio" name="rating" role="radio" id="bookmark-rating" value="4">4 Stars
+                <input type="radio" name="rating" role="radio" id="bookmark-rating" value="3">3 Stars
+                <input type="radio" name="rating" role="radio" id="bookmark-rating" value="2">2 Stars
+                <input type="radio" name="rating" role="radio" id="bookmark-rating" value="1">1 Star
               </form>
 
               <div class="error-display">
@@ -58,30 +58,29 @@ const bookmarkList = (function() {
 
   const addButtonToggle = function() {
     $('.add-button').on('click', (e) => {
-      e.preventDefault;
+      e.preventDefault();
       STORE.addButtonToggle = !STORE.addButtonToggle;
+      $('#js-bookmark-form-section').html(generateAddBookmarkElement);
+      handleNewBookmark();
     });
   };
 
   const handleNewBookmark = function() {
-    $('.add-button').on('click', (e) => {
+    $('.js-bookmark-list-container').submit(e => {
       e.preventDefault();
-      $('#js-bookmark-form-section').html(generateAddBookmarkElement);
-      $('.js-bookmark-list-container').submit(e => {
-        e.preventDefault();
-        if ($('.input-group #bookmark-title').val() === '') {
-          $('.error-display').html('<p>Title Required</p>').addClass('error-red');
-        }
-        if ($('.input-group #bookmark-url').val() === '') {
-          $('.error-display').html('<p>URL Required</p>').addClass('error-red');
-        }
-
-        const newBookmark = $(e.target).serializeJson();
-        api.createBookmark(newBookmark, (response) => {
-          STORE.addButtonToggle = false;
-          STORE.addItem(response);
-          render();
-        });
+      const newBookmark = $(e.target).serializeJson();
+      api.createBookmark(newBookmark, (response) => {
+        STORE.addItem(response);
+        STORE.setError(null);
+        STORE.addButtonToggle = !STORE.addButtonToggle;
+        $('#js-bookmark-form-section').html('');
+        $('.input-group #bookmark-title').val('');
+        $('.input-group #bookmark-url').val('');
+        $('.input-group #bookmark-description').val('');
+        render();
+      }, (error) => {
+        STORE.setError(error.responseJSON.message);
+        render();
       });
     });
   };
@@ -174,12 +173,13 @@ const bookmarkList = (function() {
   };  
 
   const render = function () {
+ 
     const bookmarkString = generateBookmarkString(STORE.bookmarks);
     $('.js-saved-bookmark-list').html(bookmarkString);
 
-    $('.input-group #bookmark-title').val('');
-    $('.input-group #bookmark-url').val('');
-    $('.input-group #bookmark-description').val('');
+    if (STORE.error) {
+      $('.error-display').html(STORE.error);
+    } 
   };
 
   const bindEventListeners = function() {

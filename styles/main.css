@@ -7,7 +7,7 @@ body {
   background-color: #e6e6e6;
   font-family: "HelveticaNeue","Helvetica Neue",Helvetica,'Roboto',sans-serif;
   font-size: 1em;
-  background: #fff;
+  background: #e9ece5;
   max-width: 650px;
   min-width: 370px;
   /* margin: 0 auto;
@@ -16,8 +16,8 @@ body {
 
 header {
   text-align: center;
-  background: #fff;
   margin: auto;
+  color: #3b3a36;
 }
 
 nav, footer {
@@ -35,10 +35,12 @@ ul {
 
 li {
   padding: 8px;
-  margin: auto;
+  margin: 8px;
   list-style: none;
   text-align: center;
-  border: 1px solid #666666;
+  background: #c0dfd9;
+  border: 1px solid #b3c2bf;
+  border-radius: 10px;
 }
 
 li span {
@@ -59,9 +61,9 @@ li .bookmark-description {
 button, input[type=submit] {
   display: inline-block;
   border-radius: 4px;
-  background-color: rgb(64, 148, 182);
+  background-color: #c0dfd9;
   border: none;
-  color: #FFFFFF;
+  color: black;
   text-align: center;
   font-size: 16px;
   padding: 8px;
@@ -73,7 +75,7 @@ button, input[type=submit] {
 
 li button {
   width: 100px;
-  background-color: rgb(134, 134, 134);
+  background-color: #e9ece5;
 }
 
 button span {
@@ -101,6 +103,16 @@ button:hover span:after {
   right: 0;
 }
 
+fieldset {
+  margin-top: 24px;
+  border: 1px solid #3b3a36;
+  border-radius: 10px;
+  text-align: center;
+}
+
+span .bookmark-title {
+  padding: 0px;
+}
 
 li button:hover {
   box-shadow: 0 8px 12px 0 rgba(0,0,0,0.24), 0 13px 46px 0 rgba(0,0,0,0.19);
@@ -120,11 +132,12 @@ form #bookmark-rating {
 }
 
 .input-group {
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
-.error-red {
+.error-display {
   color: red;
+  padding: 8px;
 
 }
 
